@@ -1,0 +1,10 @@
+{
+  "name": "setup_project",
+  "version": "1.0.0",
+  "description": "Setting up a project whith NodeJs-ExpressJs-Babel-Gulp-FacebookFlow-ES6",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Matias Zacarias (matias.zacarias.e@gmail.com)",
+  "license": "ISC"
+}
