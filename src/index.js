@@ -1,6 +1,6 @@
 /* @flow */
-
 import express from 'express';
+import path from 'path';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import morgan from 'morgan';
@@ -18,9 +18,9 @@ const upload = multer();
 const promise = mongoose.connect('mongodb://localhost/bandgo', {
   useMongoClient: true,
 });
+
 promise.then(db => {});
 
-app.use(express.static(__dirname + '/../public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,7 +33,14 @@ app.use((err, req, res, next) => {
 
 app.use('/api', routes);
 
+app.use('/static', express.static('dist'));
+app.use(express.static(path.join(__dirname, '../src')));
+
+app.get('/', (req,res) => {
+	res.sendFile(path.join(__dirname + '/index.html'));
+});
+
 // listen for requests
-app.listen(process.env.port ||3000, () => {
+app.listen(process.env.port || 3000, () => {
   console.log('Server is listening');
 });

@@ -4,10 +4,12 @@ import rimraf from 'rimraf';
 import run from 'run-sequence';
 import watch from 'gulp-watch';
 import server from 'gulp-live-server';
+import webpack from 'webpack-stream';
+import livereload from 'gulp-livereload';
 
 const paths = {
-  js: ['./src/**/*.js'],
-  destination: './app'
+  js: ['./src/**/*.js', './public/*.js'],
+  destination: './dist'
 };
 
 gulp.task('default', cb => {
@@ -15,7 +17,7 @@ gulp.task('default', cb => {
 });
 
 gulp.task('build', cb => {
-  run('clean', 'flow', 'babel', 'restart', cb);
+  run('clean', 'flow', 'babel', 'webpack', 'restart', cb);
 });
 
 gulp.task('clean', cb => {
@@ -27,7 +29,11 @@ gulp.task('flow', shell.task([
 ], {ignoreErrors: true}));
 
 gulp.task('babel', shell.task([
-  'babel src --out-dir app'
+  'babel src --out-dir dist'
+]));
+
+gulp.task('webpack', shell.task([
+  'webpack'
 ]));
 
 let express;
