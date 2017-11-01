@@ -33,7 +33,9 @@ app.use((err, req, res, next) => {
 
 app.use('/api', routes);
 
-app.use('/static', express.static('dist'));
+app.use('/dist', express.static('dist'));
+app.use('/node_modules', express.static('node_modules'));
+
 app.use(express.static(path.join(__dirname, '../src')));
 
 app.get('/', (req,res) => {

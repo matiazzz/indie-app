@@ -8,7 +8,7 @@ import webpack from 'webpack-stream';
 import livereload from 'gulp-livereload';
 
 const paths = {
-  js: ['./src/**/*.js', './public/*.js'],
+  js: ['./src/**/*.js', './public/**/*.js'],
   destination: './dist'
 };
 
